@@ -1,9 +1,7 @@
 //Erin Trahan
 
+ArrayList<Circle> circles = new ArrayList<Circle>();
 PImage image;
-int s = 400;
-int x = width/2;
-int y = height/2;
 
 Circle firstCircle;
 
@@ -12,22 +10,36 @@ void setup() {
   background(255);
   image = loadImage("flowers copy.jpg");
   firstCircle = new Circle();
+  circles.add(firstCircle);
   //image(image, 0, 0);
 }
 
 void draw() {
-  //pointlism();
-  firstCircle.drawCircle();
-  firstCircle.mouseInteraction();
-}
-
-void pointlism() {
-  color c = image.get(x, y);
-  for (int y=0; y<height; y=y+s) {
-    for (int x=0; x<width; x=x+s) {
-      fill(c);
-      noStroke();
-      ellipse(x+(s/2), y+(s/2), s, s);
+  
+  for(int i=circles.size()-1; i>=0; i--) {
+    circles.get(i).drawCircle();
+    if (circles.get(i).mouseInCircle()) {
+      circles.remove(i);
     }
   }
+  
+  for(int i=circles.size()-1; i>=0; i--) {
+    if(circles.get(i).mouseInCircle()) {
+      Circle toRemove = circles.get(i);
+      circles.remove(i);
+      Circle a1 = new Circle();
+      Circle a2 = new Circle();
+      Circle a3 = new Circle();
+      Circle a4 = new Circle();
+      a1.setSplit(toRemove.x, toRemove.y, toRemove.s / 2);
+      a2.setSplit(toRemove.x, toRemove.y, toRemove.s / 2);
+      a3.setSplit(toRemove.x, toRemove.y, toRemove.s / 2);
+      a4.setSplit(toRemove.x, toRemove.y, toRemove.s / 2);
+      circles.add(a1);
+      circles.add(a2);
+      circles.add(a3);
+      circles.add(a4);
+    }
+  }
+  
 }
