@@ -6,7 +6,7 @@ PImage image;
 Circle firstCircle;
 
 void setup() {
-  size(400, 400);
+  size(500, 500);
   background(255);
   image = loadImage("redpanda.jpg");
   firstCircle = new Circle();

@@ -1,5 +1,5 @@
 class Circle {
-  int s = 400;
+  int s = 500;
   int x = width/2;
   int y = height/2;
   color c = color(0);
