@@ -3,18 +3,23 @@ class Circle {
   int x = width/2;
   int y = height/2;
   color c = color(0);
-  
-  
+  color c2 = color(0);
+  color c3 = color(0);
+  color c4 = color(0);
+  int x2 = (x/2) + s;
+  int y2 = (y/2) + s;
   
   Circle() {
     c = image.get(x, y);
   }
   
-  void setSplit(int newX, int newY, int newSize) {
-   this.x = newX;
-   this.y = newY;
-   this.s = newSize;
-
+  Circle(int x, int y, int s){
+    this.x = x;
+    this.y = y;
+    this.s = s;
+     x2 = x + s;
+     y2 = y + s;
+     c = image.get(x, y);
   }
   
   void drawCircle() {
@@ -24,19 +29,9 @@ class Circle {
   }
   
     boolean mouseInCircle() {
-    float dist = sqrt(pow(mouseX - x,2) + pow(mouseY - y,2));
+    float dist = dist(x,y,mouseX,mouseY);//sqrt(pow(mouseX - x,2) + pow(mouseY - y,2));
     return dist<(s/2);
   }
   
-  void mouseInteraction() {
-    
-    if (mouseInCircle()) {
-      s=s/2;
-      x=x/2;
-      y=y/2;
-      background(255);
-      c = image.get(x,y);
-    }
-  }
   
 }
