@@ -11,7 +11,7 @@ void setup() {
   image = loadImage("redpanda.jpg");
   firstCircle = new Circle();
   circles.add(firstCircle);
-  //image(image, 0, 0);
+  image(image, 0, 0);
 }
 
 void draw() {
@@ -22,13 +22,13 @@ void draw() {
   
   for(int i=circles.size()-1; i>=0; i--) {
     if(circles.get(i).mouseInCircle()) {
-      println("hello");
+      //println("hello");
       Circle toRemove = circles.get(i);
       circles.remove(i);
-      Circle a1 = new Circle(toRemove.x,toRemove.y, toRemove.s/2);
-      Circle a2 = new Circle(toRemove.x2, toRemove.y, toRemove.s/2);
-      Circle a3 = new Circle(toRemove.x2, toRemove.y2, toRemove.s/2);
-      Circle a4 = new Circle(toRemove.x, toRemove.y2, toRemove.s/2);
+      Circle a1 = new Circle(toRemove.x - toRemove.s/4, toRemove.y - toRemove.s/4, toRemove.s/2);
+      Circle a2 = new Circle(toRemove.x - toRemove.s/4, toRemove.y + toRemove.s/4, toRemove.s/2);
+      Circle a3 = new Circle(toRemove.x + toRemove.s/4, toRemove.y - toRemove.s/4, toRemove.s/2);
+      Circle a4 = new Circle(toRemove.x + toRemove.s/4, toRemove.y + toRemove.s/4, toRemove.s/2);
       
       circles.add(a1);
       circles.add(a2);
