@@ -1,7 +1,7 @@
 class Circle {
-  int s = 500;
-  int x = width/2;
-  int y = height/2;
+  float s = 500;
+  float x = width/2;
+  float y = height/2;
   color c = color(0);
   color c2 = color(0);
   color c3 = color(0);
@@ -9,14 +9,14 @@ class Circle {
   
   
   Circle() {
-    c = image.get(x, y);
+    c = image.get((int)x, (int)y);
   }
   
-  Circle(int x, int y, int s){
+  Circle(float x, float y, float s){
     this.x = x;
     this.y = y;
     this.s = s;
-     c = image.get(x, y);
+     c = image.get((int)x, (int)y);
   }
   
   void drawCircle() {
