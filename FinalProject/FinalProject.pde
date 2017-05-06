@@ -1,6 +1,13 @@
-//Erin Trahan
+/*
+Final Project
+ Dot It!
+ Ineractive Art
+ Erin Trahan
+ */
 
 ArrayList<Circle> circles = new ArrayList<Circle>();
+ArrayList<Dot> dots = new ArrayList<Dot>();
+
 PImage image;
 boolean startState = true;
 
@@ -8,9 +15,12 @@ PFont title;
 PFont subtitle;
 PFont font;
 
-
 String[] images = new String[] {"redpanda.jpg", "Puppy.jpg", "Lion.jpg"};
 int currentFile;
+
+long minT = 200;
+long maxT = 400;
+long nextDot = round(random(minT, maxT));
 
 Circle firstCircle;
 
@@ -29,9 +39,22 @@ void setup() {
 }
 
 void draw() {
-
   if (startState) {
+
     background(255);
+
+    if (millis() > nextDot) {
+      long left = round(minT);
+      long right = round(maxT);
+      nextDot = nextDot + round(random(left, right));
+
+      dots.add(new Dot());
+    }
+
+    for (int i=dots.size()-1; i>=0; i--) {
+      dots.get(i).drawDot();
+      dots.get(i).move();
+    }
 
     fill(0);
     textFont(title, 50);
@@ -54,8 +77,6 @@ void draw() {
       circles.get(i).drawCircle();
     }
   }
-
-
 
   for (int i=circles.size()-1; i>=0; i--) {
     if (circles.get(i).mouseInCircle()) {

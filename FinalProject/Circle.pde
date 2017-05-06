@@ -7,7 +7,6 @@ class Circle {
   color c3 = color(0);
   color c4 = color(0);
   
-  
   Circle() {
     c = image.get((int)x, (int)y);
   }
@@ -29,6 +28,5 @@ class Circle {
     float dist = dist(x,y,mouseX,mouseY);//sqrt(pow(mouseX - x,2) + pow(mouseY - y,2));
     return dist<(s/2);
   }
-  
   
 }
