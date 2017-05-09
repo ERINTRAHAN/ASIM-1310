@@ -3,18 +3,19 @@ Final Project
  Dot It!
  Ineractive Art
  Erin Trahan
+ May 9, 2017
  */
 
 ArrayList<Circle> circles = new ArrayList<Circle>();
 ArrayList<Dot> dots = new ArrayList<Dot>();
 
-PImage image;
 boolean startState = true;
 
 PFont title;
 PFont subtitle;
 PFont font;
 
+PImage image;
 String[] images = new String[] {"redpanda.jpg", "Puppy.jpg", "Lion.jpg"};
 int currentFile;
 
@@ -22,28 +23,24 @@ long minT = 200;
 long maxT = 400;
 long nextDot = round(random(minT, maxT));
 
-Circle firstCircle;
-
 void setup() {
   size(500, 500);
-  background(255);
 
+  //loading images
   image = loadImage(images[currentFile]);
 
+  //loading fonts
   title = loadFont("Skia-Regular_Black-Condensed-48.vlw");
   subtitle = loadFont("Skia-Regular_Condensed-48.vlw");
   font = loadFont("Skia-Regular_Light-Condensed-48.vlw");
-
-  firstCircle = new Circle();
-  circles.add(firstCircle);
 }
 
 void draw() {
-  if (startState) {
+  if (startState) { //the beginning start screen
 
     background(255);
 
-    if (millis() > nextDot) {
+    if (millis() > nextDot) { //timing for raining dots in start screen
       long left = round(minT);
       long right = round(maxT);
       nextDot = nextDot + round(random(left, right));
@@ -51,11 +48,11 @@ void draw() {
       dots.add(new Dot());
     }
 
-    for (int i=dots.size()-1; i>=0; i--) {
+    for (int i=dots.size()-1; i>=0; i--) { //drawing raining dots in start screen
       dots.get(i).drawDot();
       dots.get(i).move();
     }
-
+    //text for start screen
     fill(0);
     textFont(title, 50);
     text("Dot It!", 165, 50);
@@ -71,23 +68,21 @@ void draw() {
 
     textFont(subtitle, 30);
     text("Press space to return to this screen when done.", 50, 470);
-  } else {
+  } else { //not in start screen draw the circles
     background(255);
-    for (int i=circles.size()-1; i>=0; i--) {
+    for (int i = circles.size()-1; i >= 0; i--) {
       circles.get(i).drawCircle();
     }
   }
-
-  for (int i=circles.size()-1; i>=0; i--) {
+  //splitting the circles when the mouse is inside the each circle
+  for (int i = circles.size()-1; i >= 0; i--) {
     if (circles.get(i).mouseInCircle()) {
       Circle toRemove = circles.get(i);
       circles.remove(i);
-
       Circle a1 = new Circle(toRemove.x - toRemove.s/4, toRemove.y - toRemove.s/4, toRemove.s/2);
       Circle a2 = new Circle(toRemove.x - toRemove.s/4, toRemove.y + toRemove.s/4, toRemove.s/2);
       Circle a3 = new Circle(toRemove.x + toRemove.s/4, toRemove.y - toRemove.s/4, toRemove.s/2);
       Circle a4 = new Circle(toRemove.x + toRemove.s/4, toRemove.y + toRemove.s/4, toRemove.s/2);
-
       circles.add(a1);
       circles.add(a2);
       circles.add(a3);
@@ -96,9 +91,8 @@ void draw() {
   }
 }
 
-
 void keyPressed() {
-
+  //pressing a certain key for certain image
   if (key == '1') {
     startState = false;
     currentFile = 0;
@@ -109,7 +103,9 @@ void keyPressed() {
     startState = false;
     currentFile = 2;
   } else if (key == ' ') {
-    startState = true;
+    startState = true; //returns to start screen
   }
-  image = loadImage(images[currentFile]);
+  circles.clear(); //clearing old arraylist of circles
+  circles.add(new Circle()); //starting with new circles
+  image = loadImage(images[currentFile]); //calling correct image
 }
